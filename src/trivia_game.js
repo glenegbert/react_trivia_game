@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import GameIntro from './game_intro'
+import { connect } from "react-redux";
 
-
-function Listing(props) {
-  return <div>{props.ok}</div>;
+function TriviaGame(props) {
+  return <GameIntro/>
 }
 
-export default Listing
+const ok = (str) => str
+
+export default TriviaGame
