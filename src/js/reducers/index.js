@@ -1,4 +1,4 @@
-import { ADD_QUESTIONS, UPDATE_GAMESTATE, ADD_RESPONSE } from "../constants/action-types";
+import { ADD_QUESTIONS, UPDATE_GAMESTATE, ADD_RESPONSE, CLEAR_QUESTIONS } from "../constants/action-types";
 const initialState = {
   gameState: "intro",
   questions: []
@@ -12,6 +12,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, gameState: action.payload };
     case ADD_RESPONSE:
       return { ...state, questions: addResponse(state.questions, action.payload) };
+    case CLEAR_QUESTIONS:
+      return { ...state, questions: []};
     default:
       return state;
   }
