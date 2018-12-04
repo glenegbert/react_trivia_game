@@ -10,7 +10,7 @@ const QuestionDisplay = ({ question, number, addResponse }) => (
     </div>
     <div>
       {' '}
-      {question.question.replace(/&quot;/g, '"')}
+      {question.question.replace(/&quot;/g, '"').replace(/&#039;/g,"'")}
       {' '}
     </div>
     <div>

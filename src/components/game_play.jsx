@@ -19,7 +19,7 @@ class GamePlay extends Component {
   constructor() {
     super();
 
-    this.addResponseWithPossibleGameStateChange = this.addResponseWithPossibleGameStateChange.bind(this);
+    this.addResponseWithPossibleChangeToResults = this.addResponseWithPossibleChangeToResults.bind(this);
   }
 
   componentDidMount() {
@@ -40,23 +40,26 @@ class GamePlay extends Component {
         <QuestionDisplay
           question={this.nextQuestion()}
           number={this.questionNumber()}
-          addResponse={this.addResponseWithPossibleGameStateChange}
+          addResponse={this.addResponseWithPossibleChangeToResults}
         />
       </div>
     );
   }
 
-  addResponseWithPossibleGameStateChange(response) {
+  addResponseWithPossibleChangeToResults(response) {
     this.props.addResponse(response);
-    if (this.questionNumber() === 10) {
+    if (this.questionNumber() === this.lastQuestionNumber()) {
       this.props.updateGameState(RESULTS);
     }
+  }
+
+  lastQuestionNumber() {
+    return this.props.questions.length
   }
 
   questionsLoaded() {
     return this.props.questions.length > 0;
   }
-
 
   nextQuestion() {
     return this.questionsToBeAnswered()[0];

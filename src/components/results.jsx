@@ -12,11 +12,6 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({ questions: state.questions });
 
-const returnToIntro = (updateGameState, clearQuestions) => {
-  clearQuestions();
-  updateGameState(INTRO);
-};
-
 const Results = ({ questions, updateGameState, clearQuestions }) => (
   <div>
     <div> Question Results </div>
@@ -25,7 +20,7 @@ const Results = ({ questions, updateGameState, clearQuestions }) => (
       {questions[0].category}
       {' '}
     </div>
-    <button type="button" onClick={() => returnToIntro(updateGameState, clearQuestions)}>Play Again</button>
+    <button type="button" onClick={() => {updateGameState(INTRO);clearQuestions()}}>Play Again</button>
   </div>
 );
 
