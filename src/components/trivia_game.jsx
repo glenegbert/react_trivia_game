@@ -4,10 +4,11 @@ import GameIntro from './game_intro';
 import GamePlay from './game_play';
 import Results from './results';
 import { INTRO, GAME_PLAY, RESULTS } from '../js/constants/game-states';
+import '../scss/trivia_game.scss';
 
 const mapStateToProps = state => ({ gameState: state.gameState });
 
-const TriviaGame = ({ gameState }) => {
+const gameScreen = (gameState) => {
   switch (gameState) {
     case INTRO:
       return <GameIntro />;
@@ -19,6 +20,12 @@ const TriviaGame = ({ gameState }) => {
       return <GameIntro />;
   }
 };
+
+const TriviaGame = ({ gameState }) => (
+  <div className="trivia-game__screen-wrapper">
+    {gameScreen(gameState)}
+  </div>
+);
 
 
 export default connect(mapStateToProps)(TriviaGame);

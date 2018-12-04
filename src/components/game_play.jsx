@@ -7,6 +7,7 @@ import QuestionDisplay from './question_display';
 import { RESULTS } from '../js/constants/game-states';
 
 
+
 const mapDispatchToProps = dispatch => ({
   addQuestions: questions => dispatch(addQuestions(questions)),
   addResponse: response => dispatch(addResponse(response)),
