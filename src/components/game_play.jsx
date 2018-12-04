@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { addQuestions, addResponse, updateGameState } from '../js/actions/index';
 import QuestionDisplay from './question_display';
+import { RESULTS } from '../js/constants/game-states';
 
 
 const mapDispatchToProps = dispatch => ({
@@ -48,7 +49,7 @@ class GamePlay extends Component {
   addResponseWithPossibleGameStateChange(response) {
     this.props.addResponse(response);
     if (this.questionNumber() === 10) {
-      this.props.updateGameState('results');
+      this.props.updateGameState(RESULTS);
     }
   }
 

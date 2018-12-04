@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateGameState } from '../js/actions/index';
+import { GAME_PLAY } from '../js/constants/game-states';
 
 const mapStateToProps = state => ({ gameState: state.gameState });
 
@@ -15,7 +16,7 @@ const GameIntro = ({ updateGameState }) => (
         Intro Text
     </div>
     <div>
-      <button type="button" onClick={() => updateGameState('gamePlay')}>
+      <button type="button" onClick={() => updateGameState(GAME_PLAY)}>
          BEGIN
       </button>
     </div>

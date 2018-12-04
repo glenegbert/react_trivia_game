@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { updateGameState, clearQuestions } from '../js/actions/index';
+import { INTRO } from '../js/constants/game-states';
 
 const mapDispatchToProps = dispatch => ({
   updateGameState: gameState => dispatch(updateGameState(gameState)),
@@ -13,7 +14,7 @@ const mapStateToProps = state => ({ questions: state.questions });
 
 const returnToIntro = (updateGameState, clearQuestions) => {
   clearQuestions();
-  updateGameState('intro');
+  updateGameState(INTRO);
 };
 
 const Results = ({ questions, updateGameState, clearQuestions }) => (
