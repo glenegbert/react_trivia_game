@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from "react-redux";
 import { toggleGameState } from "./js/actions/index";
 const mapStateToProps = state => {
@@ -15,11 +15,11 @@ const GameIntro = ( { gameState, toggleGameState }) => {
   return (
     <div>
      <div>
-       State = { gameState }
+        Intro Text
      </div>
      <div>
        <button onClick={toggleGameState}>
-         Toggle
+         BEGIN
        </button>
      </div>
     </div>)

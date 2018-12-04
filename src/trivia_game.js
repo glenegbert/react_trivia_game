@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import GameIntro from './game_intro'
+import GamePlay from './game_play'
 import { connect } from "react-redux";
 
-function TriviaGame(props) {
-  return <GameIntro/>
+const mapStateToProps = state => {
+  return { gameState: state.gameState};
+};
+
+const TriviaGame = ({ gameState }) => {
+  if (gameState === "intro") {
+    return <GameIntro/>;
+  }
+  return <GamePlay/>;
 }
 
-const ok = (str) => str
 
-export default TriviaGame
+export default connect(mapStateToProps)(TriviaGame)
