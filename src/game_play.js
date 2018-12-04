@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { addQuestions, addResponse } from './js/actions/index';
+import { addQuestions, addResponse, updateGameState } from './js/actions/index';
 import { connect } from 'react-redux';
 import QuestionDisplay from './question_display';
 
@@ -9,7 +9,7 @@ const mapDispatchToProps = dispatch => {
   return {
     addQuestions: questions => dispatch(addQuestions(questions)),
     addResponse: response => dispatch(addResponse(response)),
-
+    updateGameState: gameState => dispatch(updateGameState(gameState)),
   };
 };
 
@@ -18,12 +18,14 @@ const mapStateToProps = state => {
 };
 
 class GamePlay extends Component {
+  constructor() {
+    super();
+
+    this.addResponse = this.addResponse.bind(this);
+  }
   render () {
     if (this.questionsLoaded()) {
-      if (this.moreQuestions()) {
-        return this.displayNextQuestion()
-      }
-      return this.showResults()
+      return this.displayNextQuestion()
     }
     return this.loadingIndicator()
   };
@@ -46,9 +48,16 @@ class GamePlay extends Component {
         <QuestionDisplay
            question={this.nextQuestion()}
            number={this.questionNumber()}
-           addResponse={this.props.addResponse}/>
+           addResponse={this.addResponse}/>
       </div>
     )
+  }
+
+  addResponse (response) {
+    this.props.addResponse(response)
+    if (this.questionNumber() === 10) {
+      this.props.updateGameState("results");
+    }
   }
 
   questionsLoaded () {
@@ -75,11 +84,6 @@ class GamePlay extends Component {
     return this.questionsToBeAnswered().length > 0;
   }
 
-  showResults () {
-    return (<div>
-      Results
-    </div>)
-  }
 
 
 };

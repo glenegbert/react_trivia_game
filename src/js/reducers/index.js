@@ -1,4 +1,4 @@
-import { ADD_QUESTIONS, TOGGLE_GAMESTATE, ADD_RESPONSE } from "../constants/action-types";
+import { ADD_QUESTIONS, UPDATE_GAMESTATE, ADD_RESPONSE } from "../constants/action-types";
 const initialState = {
   gameState: "intro",
   questions: []
@@ -8,8 +8,8 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_QUESTIONS:
       return { ...state, questions: action.payload };
-    case TOGGLE_GAMESTATE:
-      return { ...state, gameState: toggleGameState(state.gameState) };
+    case UPDATE_GAMESTATE:
+      return { ...state, gameState: action.payload };
     case ADD_RESPONSE:
       return { ...state, questions: addResponse(state.questions, action.payload) };
     default:
@@ -25,11 +25,6 @@ const addResponse = (questions, response) => {
                          response.question))
   return newQuestions;
 
-};
-
-const toggleGameState = (gameState) => {
-  if (gameState === "intro") { return "playing" }
-  return "intro";
 };
 
 export default rootReducer;

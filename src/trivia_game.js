@@ -1,6 +1,7 @@
-import React from 'react';
 import GameIntro from './game_intro'
 import GamePlay from './game_play'
+import Results from './results';
+import React from 'react';
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
@@ -8,10 +9,14 @@ const mapStateToProps = state => {
 };
 
 const TriviaGame = ({ gameState }) => {
-  if (gameState === "intro") {
-    return <GameIntro/>;
+  switch (gameState) {
+    case "gamePlay":
+      return <GamePlay/>;
+    case "results":
+      return <Results/>;
+    default:
+      return <GameIntro/>;
   }
-  return <GamePlay/>;
 }
 
 
