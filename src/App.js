@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import TriviaGame from './trivia_game';
+import TriviaGame from './components/trivia_game';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <TriviaGame/>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <TriviaGame />
+  </div>
+);
+
 
 export default App;

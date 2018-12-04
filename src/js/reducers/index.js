@@ -1,7 +1,10 @@
-import { ADD_QUESTIONS, UPDATE_GAMESTATE, ADD_RESPONSE, CLEAR_QUESTIONS } from "../constants/action-types";
+import {
+  ADD_QUESTIONS, UPDATE_GAMESTATE, ADD_RESPONSE, CLEAR_QUESTIONS,
+} from '../constants/action-types';
+
 const initialState = {
-  gameState: "intro",
-  questions: []
+  gameState: 'intro',
+  questions: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -13,20 +16,20 @@ const rootReducer = (state = initialState, action) => {
     case ADD_RESPONSE:
       return { ...state, questions: addResponse(state.questions, action.payload) };
     case CLEAR_QUESTIONS:
-      return { ...state, questions: []};
+      return { ...state, questions: [] };
     default:
       return state;
   }
 };
 
 const addResponse = (questions, response) => {
-  let newQuestions= questions.filter(
-    (question) => question !== response.question)
+  const newQuestions = questions.filter(
+    question => question !== response.question,
+  );
   newQuestions
-    .push(Object.assign({response: response.response},
-                         response.question))
+    .push(Object.assign({ response: response.response },
+      response.question));
   return newQuestions;
-
 };
 
 export default rootReducer;
