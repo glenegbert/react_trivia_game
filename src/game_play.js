@@ -19,21 +19,13 @@ const mapStateToProps = state => {
 
 class GamePlay extends Component {
   render () {
-    if (this.props.questions.length > 0) {
-      return (
-        <div>
-          <QuestionDisplay
-             question={this.nextQuestion()}
-             number={this.questionNumber()}
-             addResponse={this.props.addResponse}/>
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          Loading
-        </div>)
+    if (this.questionsLoaded()) {
+      if (this.moreQuestions()) {
+        return this.displayNextQuestion()
+      }
+      return this.showResults()
     }
+    return this.loadingIndicator()
   };
 
   componentDidMount () {
@@ -41,16 +33,53 @@ class GamePlay extends Component {
       .then((json) => this.props.addQuestions(json.data.results))
   }
 
+  loadingIndicator () {
+    return (
+      <div>
+        Loading
+      </div>)
+  }
+
+  displayNextQuestion() {
+    return (
+      <div>
+        <QuestionDisplay
+           question={this.nextQuestion()}
+           number={this.questionNumber()}
+           addResponse={this.props.addResponse}/>
+      </div>
+    )
+  }
+
+  questionsLoaded () {
+    return this.props.questions.length > 0
+  }
+
+
   nextQuestion() {
-    return this.props.questions
-      .find((question)=> question.response === undefined)
+    return this.questionsToBeAnswered()[0]
   }
 
   questionNumber() {
-    return 11 - this.props.questions
-      .filter((question) => question.response === undefined).length
+    return (11 - this.questionsToBeAnswered().length);
   }
 
+  questionsToBeAnswered() {
+    return this.props.questions
+      .filter((question) =>
+        question.response === undefined);
+
+  }
+
+  moreQuestions () {
+    return this.questionsToBeAnswered().length > 0;
+  }
+
+  showResults () {
+    return (<div>
+      Results
+    </div>)
+  }
 
 
 };
