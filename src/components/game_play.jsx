@@ -7,7 +7,6 @@ import QuestionDisplay from './question_display';
 import { RESULTS } from '../js/constants/game-states';
 
 
-
 const mapDispatchToProps = dispatch => ({
   addQuestions: questions => dispatch(addQuestions(questions)),
   addResponse: response => dispatch(addResponse(response)),
@@ -35,7 +34,7 @@ class GamePlay extends Component {
       </div>);
   }
 
-  displayNextQuestion() {
+  displayNextQuestionOrGoToResults() {
     return (
       <div>
         <QuestionDisplay
@@ -55,8 +54,8 @@ class GamePlay extends Component {
     }
   }
 
-  lastQuestionNumber() {
-    return this.props.questions.length
+  lastQuestionNumber(){
+    return this.props.questions.length;
   }
 
   questionsLoaded() {
@@ -68,7 +67,8 @@ class GamePlay extends Component {
   }
 
   questionNumber() {
-    return ((this.lastQuestionNumber() + 1) - this.questionsToBeAnswered().length);
+    return ((this.lastQuestionNumber() + 1) -
+       this.questionsToBeAnswered().length);
   }
 
   questionsToBeAnswered() {
@@ -82,7 +82,7 @@ class GamePlay extends Component {
 
   render() {
     if (this.questionsLoaded()) {
-      return this.displayNextQuestion();
+      return this.displayNextQuestionOrGoToResults();
     }
     return this.loadingIndicator();
   }
