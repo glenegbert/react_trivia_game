@@ -39,6 +39,7 @@ class GamePlay extends Component {
     return (
       <div>
         <QuestionDisplay
+          totalQuestions={this.lastQuestionNumber()}
           question={this.nextQuestion()}
           number={this.questionNumber()}
           addResponse={this.addResponseWithPossibleChangeToResults}
@@ -67,7 +68,7 @@ class GamePlay extends Component {
   }
 
   questionNumber() {
-    return (11 - this.questionsToBeAnswered().length);
+    return ((this.lastQuestionNumber() + 1) - this.questionsToBeAnswered().length);
   }
 
   questionsToBeAnswered() {

@@ -6,7 +6,7 @@ import { GAME_PLAY } from '../js/constants/game-states';
 import '../scss/game_intro.scss';
 import ReactUtils from '../helpers/react_utils';
 
-var bem = ReactUtils.makeBem('game-intro');
+const bem = ReactUtils.makeBem('game-intro');
 
 const mapStateToProps = state => ({ gameState: state.gameState });
 

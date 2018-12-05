@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../scss/question_display.scss';
 import ReactUtils from '../helpers/react_utils';
+import QuestionHelpers from '../helpers/questions_helpers';
 
-var bem = ReactUtils.makeBem('question-display');
+const bem = ReactUtils.makeBem('question-display');
 
-const QuestionDisplay = ({ question, number, addResponse }) => (
+const QuestionDisplay = ({ question, number, addResponse, totalQuestions }) => (
   <div>
 
     <div className={bem('header')}>
@@ -13,11 +14,11 @@ const QuestionDisplay = ({ question, number, addResponse }) => (
     </div>
 
     <div className={bem('question')}>
-      {question.question.replace(/&quot;/g, '"').replace(/&#039;/g,"'")}
+      {QuestionHelpers.cleanQuestion(question.question)}
     </div>
 
     <div className={bem('question-number')}>
-      {number} / 10
+      {number} / {totalQuestions}
     </div>
 
     <div className={bem('response-buttons')}>
