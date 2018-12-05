@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import GameIntro from './game_intro';
 import GamePlay from './game_play';
 import Results from './results';
@@ -27,5 +28,7 @@ const TriviaGame = ({ gameState }) => (
   </div>
 );
 
-
+TriviaGame.propTypes = {
+  gameState: PropTypes.string.isRequired,
+};
 export default connect(mapStateToProps)(TriviaGame);

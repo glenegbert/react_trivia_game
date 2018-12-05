@@ -15,24 +15,23 @@ const mapDispatchToProps = dispatch => ({
   clearQuestions: () => dispatch(clearQuestions()),
 });
 
-
 const mapStateToProps = state => ({ questions: state.questions });
 
 const Results = ({ questions, updateGameState, clearQuestions }) => (
   <div>
     <div className={bem('header')}>
       <h2> You Scored </h2>
-      <h2> {ResultsHelpers.numberCorrect(questions)}/{questions.length}</h2>
+      <h2>
+        {ResultsHelpers.numberCorrect(questions)}/
+        {questions.length}
+      </h2>
     </div>
-
     <div>
       <ul className={bem('question-list')}>
-        {questions.map(question => <QuestionDisplay question={question}/>)}
+        {questions.map(question => <ResultDisplay question={question} />)}
       </ul>
     </div>
-
-
-    <button className={bem('play-again-button')} type="button" onClick={() => {updateGameState(INTRO);clearQuestions()}}>Play Again</button>
+    <button className={bem('play-again-button')} type="button" onClick={() => { updateGameState(INTRO); clearQuestions(); }}>Play Again</button>
   </div>
 );
 
@@ -42,21 +41,36 @@ Results.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
+const ResultDisplay = ({ question }) => (
+  <li className={bem('question')}>
+    {<PlusMinusIndicator question={question} />}
+    <span>
+      {QuestionHelpers.cleanQuestion(question.question)}
+    </span>
+    <div className={bem('question__correct-answer')}>
+      CorrectAnswer  = {question.correct_answer}
+    </div>
+  </li>);
 
-const QuestionDisplay = ({question}) => {
-  return (
-    <li className={bem('question')}>
-      {<PlusMinusIndicator question={question}/>}
-      <span> {QuestionHelpers.cleanQuestion(question.question)} </span>
-      <div className={bem('question__correct-answer')}> CorrectAnswer: {question.correct_answer} </div>
-    </li>);
-}
+ResultDisplay.propTypes = {
+  question: PropTypes.shape({
+    question: PropTypes.string.isRequired,
+    correct_answer: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
-const PlusMinusIndicator = ({question}) => {
-  if(ResultsHelpers.questionCorrect(question)) {
+const PlusMinusIndicator = ({ question }) => {
+  if (ResultsHelpers.questionCorrect(question)) {
     return <span> + </span>;
   }
   return <span> - </span>;
-}
+};
+
+PlusMinusIndicator.propTypes = {
+  question: PropTypes.shape({
+    response: PropTypes.string.isRequired,
+    correct_answer: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Results);
