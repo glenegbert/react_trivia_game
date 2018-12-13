@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { addQuestions, addResponse, updateGameState, clearQuestions } from '../js/actions/index';
+import {
+  addQuestions, addResponse, updateGameState, clearQuestions,
+} from '../js/actions/index';
 import QuestionDisplay from './question_display';
 
 
@@ -19,19 +21,22 @@ class GamePlay extends Component {
   constructor() {
     super();
 
-    this.addResponseWithPossibleChangeToResults = this.addResponseWithPossibleChangeToResults.bind(this);
+    this.addResponseWithPossibleChangeToResults =
+      this.addResponseWithPossibleChangeToResults.bind(this);
   }
 
   componentWillMount() {
+    const { clearQuestions, history } = this.props;
     if (this.questionsLoaded() && !this.nextQuestion()) {
-      this.props.clearQuestions();
-      this.props.history.push("/intro")
+      clearQuestions();
+      history.push('/intro');
     }
   }
 
   componentDidMount() {
+    const { addQuestions } = this.props;
     axios.get('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
-      .then(json => this.props.addQuestions(json.data.results));
+      .then(json => addQuestions(json.data.results));
   }
 
   loadingIndicator() {
@@ -55,18 +60,19 @@ class GamePlay extends Component {
   }
 
   addResponseWithPossibleChangeToResults(response) {
-    this.props.addResponse(response);
+    const { addResponse, history } = this.props;
+    addResponse(response);
     if (this.questionNumber() === this.lastQuestionNumber()) {
-      this.props.history.push("/results")
+      history.push('/results');
     }
   }
 
-  lastQuestionNumber(){
-    return this.props.questions.length;
+  lastQuestionNumber() {
+    return this.questions().length;
   }
 
   questionsLoaded() {
-    return this.props.questions.length > 0;
+    return this.questions().length > 0;
   }
 
   nextQuestion() {
@@ -74,17 +80,21 @@ class GamePlay extends Component {
   }
 
   questionNumber() {
-    return ((this.lastQuestionNumber() + 1) -
-       this.questionsToBeAnswered().length);
+    return ((this.lastQuestionNumber() + 1)
+       - this.questionsToBeAnswered().length);
   }
 
   questionsToBeAnswered() {
-    return this.props.questions
+    return this.questions()
       .filter(question => question.response === undefined);
   }
 
   moreQuestions() {
     return this.questionsToBeAnswered().length > 0;
+  }
+
+  questions() {
+    return this.props.questions;
   }
 
   render() {
@@ -97,7 +107,6 @@ class GamePlay extends Component {
 
 GamePlay.propTypes = {
   addQuestions: PropTypes.func.isRequired,
-  updateGameState: PropTypes.func.isRequired,
   addResponse: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

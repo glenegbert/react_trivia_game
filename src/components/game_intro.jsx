@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { updateGameState } from '../js/actions/index';
 import '../scss/game_intro.scss';
 import ReactUtils from '../helpers/react_utils';
-import { NavLink } from 'react-router-dom';
 
 const bem = ReactUtils.makeBem('game-intro');
 
@@ -26,7 +25,7 @@ const GameIntro = ({ updateGameState, history }) => (
       <h2>Can you score 100%? </h2>
     </div>
     <div className={bem('begin-button')}>
-      <button type="button" onClick={)()=>{history.push("/play")}>
+      <button type="button" onClick={() => history.push('/play')}>
         Begin
       </button>
     </div>

@@ -17,7 +17,8 @@ const QuestionDisplay = ({
       {QuestionHelpers.cleanQuestion(question.question)}
     </div>
     <div className={bem('question-number')}>
-      {number}/
+      {number}
+/
       {totalQuestions}
     </div>
     <div className={bem('response-buttons')}>
