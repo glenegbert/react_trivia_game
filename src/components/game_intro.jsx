@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateGameState } from '../js/actions/index';
-import { GAME_PLAY } from '../js/constants/game-states';
 import '../scss/game_intro.scss';
 import ReactUtils from '../helpers/react_utils';
 import { NavLink } from 'react-router-dom';
@@ -15,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
   updateGameState: gameState => dispatch(updateGameState(gameState)),
 });
 
-const GameIntro = ({ updateGameState }) => (
+const GameIntro = ({ updateGameState, history }) => (
   <div>
     <div className={bem('header')}>
       <h2><strong>Welcome to the Trivia Challenge!</strong></h2>
@@ -27,10 +26,9 @@ const GameIntro = ({ updateGameState }) => (
       <h2>Can you score 100%? </h2>
     </div>
     <div className={bem('begin-button')}>
-      <button type="button" onClick={() => updateGameState(GAME_PLAY)}>
-         BEGIN
+      <button type="button" onClick={)()=>{history.push("/play")}>
+        Begin
       </button>
-      <span><NavLink to='/play'>Begin</NavLink></span>
     </div>
   </div>);
 

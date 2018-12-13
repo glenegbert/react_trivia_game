@@ -1,8 +1,8 @@
 import React from 'react';
+
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { updateGameState, clearQuestions } from '../js/actions/index';
-import { INTRO } from '../js/constants/game-states';
 import '../scss/results.scss';
 import ReactUtils from '../helpers/react_utils';
 import ResultsHelpers from '../helpers/results_helpers';
@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({ questions: state.questions });
 
-const Results = ({ questions, updateGameState, clearQuestions }) => (
+const Results = ({ questions, updateGameState, clearQuestions, history }) => (
   <div>
     <div className={bem('header')}>
       <h2> You Scored </h2>
@@ -32,8 +32,9 @@ const Results = ({ questions, updateGameState, clearQuestions }) => (
         {questions.map(question => <ResultDisplay question={question} />)}
       </ul>
     </div>
-    <span><NavLink to='/intro'>Play Again</NavLink></span>
-    <button className={bem('play-again-button')} type="button" onClick={() => { updateGameState(INTRO); clearQuestions(); }}>Play Again</button>
+    <button className={bem('play-again-button')} type="button" onClick={()=> history.push("/intro")}>
+      Play Again
+    </button>
   </div>
 );
 
