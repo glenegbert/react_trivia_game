@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { addQuestions, addResponse, updateGameState } from '../js/actions/index';
+import { addQuestions, addResponse, updateGameState, clearQuestions } from '../js/actions/index';
 import QuestionDisplay from './question_display';
 import { RESULTS } from '../js/constants/game-states';
 
@@ -11,6 +11,7 @@ const mapDispatchToProps = dispatch => ({
   addQuestions: questions => dispatch(addQuestions(questions)),
   addResponse: response => dispatch(addResponse(response)),
   updateGameState: gameState => dispatch(updateGameState(gameState)),
+  clearQuestions: () => dispatch(clearQuestions()),
 });
 
 const mapStateToProps = state => ({ questions: state.questions });
@@ -20,6 +21,13 @@ class GamePlay extends Component {
     super();
 
     this.addResponseWithPossibleChangeToResults = this.addResponseWithPossibleChangeToResults.bind(this);
+  }
+
+  componentWillMount() {
+    if (this.questionsLoaded() && !this.nextQuestion()) {
+      this.props.clearQuestions();
+      this.props.history.push("/intro")
+    }
   }
 
   componentDidMount() {
@@ -50,7 +58,7 @@ class GamePlay extends Component {
   addResponseWithPossibleChangeToResults(response) {
     this.props.addResponse(response);
     if (this.questionNumber() === this.lastQuestionNumber()) {
-      this.props.updateGameState(RESULTS);
+      this.props.history.push("/results")
     }
   }
 
@@ -81,7 +89,7 @@ class GamePlay extends Component {
   }
 
   render() {
-    if (this.questionsLoaded()) {
+    if (this.questionsLoaded() && this.nextQuestion()) {
       return this.displayNextQuestionOrGoToResults();
     }
     return this.loadingIndicator();

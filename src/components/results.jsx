@@ -7,6 +7,7 @@ import '../scss/results.scss';
 import ReactUtils from '../helpers/react_utils';
 import ResultsHelpers from '../helpers/results_helpers';
 import QuestionHelpers from '../helpers/questions_helpers';
+import { NavLink } from 'react-router-dom';
 
 const bem = ReactUtils.makeBem('results');
 
@@ -31,6 +32,7 @@ const Results = ({ questions, updateGameState, clearQuestions }) => (
         {questions.map(question => <ResultDisplay question={question} />)}
       </ul>
     </div>
+    <span><NavLink to='/intro'>Play Again</NavLink></span>
     <button className={bem('play-again-button')} type="button" onClick={() => { updateGameState(INTRO); clearQuestions(); }}>Play Again</button>
   </div>
 );

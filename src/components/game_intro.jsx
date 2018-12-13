@@ -5,6 +5,7 @@ import { updateGameState } from '../js/actions/index';
 import { GAME_PLAY } from '../js/constants/game-states';
 import '../scss/game_intro.scss';
 import ReactUtils from '../helpers/react_utils';
+import { NavLink } from 'react-router-dom';
 
 const bem = ReactUtils.makeBem('game-intro');
 
@@ -29,6 +30,7 @@ const GameIntro = ({ updateGameState }) => (
       <button type="button" onClick={() => updateGameState(GAME_PLAY)}>
          BEGIN
       </button>
+      <span><NavLink to='/play'>Begin</NavLink></span>
     </div>
   </div>);
 

@@ -22,6 +22,7 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
+
 const addResponse = (questions, response) => {
   const newQuestions = questions.filter(
     question => question !== response.question,

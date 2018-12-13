@@ -6,29 +6,20 @@ import GamePlay from './game_play';
 import Results from './results';
 import { INTRO, GAME_PLAY, RESULTS } from '../js/constants/game-states';
 import '../scss/trivia_game.scss';
+import { NavLink, Switch, Route, withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => ({ gameState: state.gameState });
 
-const gameScreen = (gameState) => {
-  switch (gameState) {
-    case INTRO:
-      return <GameIntro />;
-    case GAME_PLAY:
-      return <GamePlay />;
-    case RESULTS:
-      return <Results />;
-    default:
-      return <GameIntro />;
-  }
-};
-
-const TriviaGame = ({ gameState }) => (
+const TriviaGame = () => (
   <div className="trivia-game__screen-wrapper">
-    {gameScreen(gameState)}
-  </div>
-);
+      <Switch>
+        <Route exact path='/play' component={GamePlay}></Route>
+        <Route exact path='/intro' component={GameIntro}></Route>
+        <Route exact path='/results' component={Results}></Route>
+        <Route component={GameIntro}></Route>
+      </Switch>
+    </div>
+    );
 
-TriviaGame.propTypes = {
-  gameState: PropTypes.string.isRequired,
-};
-export default connect(mapStateToProps)(TriviaGame);
+export default withRouter(connect(mapStateToProps)(TriviaGame));
+
