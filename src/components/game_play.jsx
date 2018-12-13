@@ -26,11 +26,8 @@ class GamePlay extends Component {
   }
 
   componentWillMount() {
-    const { clearQuestions, history } = this.props;
-    if (this.questionsLoaded() && !this.nextQuestion()) {
-      clearQuestions();
-      history.push('/intro');
-    }
+    const { clearQuestions } = this.props;
+    clearQuestions();
   }
 
   componentDidMount() {
