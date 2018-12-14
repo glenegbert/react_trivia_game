@@ -6,11 +6,10 @@ const initialState = {
   gameState: 'intro',
   questions: [],
 };
-
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_QUESTIONS:
-      return { ...state, questions: action.payload };
+      return { ...state, questions: action.payload};
     case UPDATE_GAMESTATE:
       return { ...state, gameState: action.payload };
     case ADD_RESPONSE:
@@ -21,6 +20,7 @@ const rootReducer = (state = initialState, action) => {
       return state;
   }
 };
+
 
 
 const addResponse = (questions, response) => {

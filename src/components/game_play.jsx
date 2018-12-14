@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+// import axios from 'axios';
 import { connect } from 'react-redux';
 import {
-  addQuestions, addResponse, updateGameState, clearQuestions,
+  addQuestions, addResponse, updateGameState, clearQuestions, fetchAndAddQuestions
 } from '../js/actions/index';
 import QuestionDisplay from './question_display';
 
@@ -13,6 +13,7 @@ const mapDispatchToProps = dispatch => ({
   addResponse: response => dispatch(addResponse(response)),
   updateGameState: gameState => dispatch(updateGameState(gameState)),
   clearQuestions: () => dispatch(clearQuestions()),
+  fetchAndAddQuestions: () => dispatch(fetchAndAddQuestions),
 });
 
 const mapStateToProps = state => ({ questions: state.questions });
@@ -31,9 +32,10 @@ class GamePlay extends Component {
   }
 
   componentDidMount() {
-    const { addQuestions } = this.props;
-    axios.get('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
-      .then(json => addQuestions(json.data.results));
+    const { fetchAndAddQuestions } = this.props;
+    fetchAndAddQuestions()
+//    axios.get('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
+ //     .then(json => addQuestions(json.data.results));
   }
 
   loadingIndicator() {
