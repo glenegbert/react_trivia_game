@@ -11,7 +11,7 @@ const ResultDisplay = ({ question }) => (
   <li className={bem('question')}>
     {<PlusMinusIndicator correct={ResultsHelpers.questionCorrect(question)} />}
     <span>
-      {QuestionHelpers.cleanQuestion(question.question)}
+      {QuestionHelpers.parsedQuestion(question.question)}
     </span>
     <div className={bem('question__correct-answer')}>
       CorrectAnswer  =

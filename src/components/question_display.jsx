@@ -14,7 +14,7 @@ const QuestionDisplay = ({
       <h2><strong>{question.category}</strong></h2>
     </div>
     <div className={bem('question')}>
-      {QuestionHelpers.cleanQuestion(question.question)}
+      {QuestionHelpers.parsedQuestion(question.question)}
     </div>
     <div className={bem('question-number')}>
       {number}
