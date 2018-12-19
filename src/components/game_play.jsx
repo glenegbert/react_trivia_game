@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // import axios from 'axios';
 import { connect } from 'react-redux';
 import {
-  addQuestions, addResponse, updateGameState, clearQuestions, fetchAndAddQuestions
+  addQuestions, addResponse, clearQuestions, fetchAndAddQuestions
 } from '../js/actions/index';
 import QuestionDisplay from './question_display';
 
@@ -11,7 +11,6 @@ import QuestionDisplay from './question_display';
 const mapDispatchToProps = dispatch => ({
   addQuestions: questions => dispatch(addQuestions(questions)),
   addResponse: response => dispatch(addResponse(response)),
-  updateGameState: gameState => dispatch(updateGameState(gameState)),
   clearQuestions: () => dispatch(clearQuestions()),
   fetchAndAddQuestions: () => dispatch(fetchAndAddQuestions),
 });

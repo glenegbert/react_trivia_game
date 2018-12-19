@@ -1,16 +1,13 @@
 import {
-  ADD_QUESTIONS, UPDATE_GAMESTATE, ADD_RESPONSE, CLEAR_QUESTIONS,
+  ADD_QUESTIONS, ADD_RESPONSE, CLEAR_QUESTIONS,
 } from '../constants/action-types';
-import axios from 'axios';
+import QuestionsService from '../../services/questions_service';
 
 const fetchAndAddQuestions = (dispatch) => {
-  axios.get('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
-      .then(json => dispatch(addQuestions(json.data.results)));
+    QuestionsService.fetchQuestions(dispatch, addQuestions)
 };
 
- const addQuestions = questions => ({ type: ADD_QUESTIONS, payload: questions });
-
-const updateGameState = gameState => ({ type: UPDATE_GAMESTATE, payload: gameState });
+const addQuestions = questions => ({ type: ADD_QUESTIONS, payload: questions });
 
 const addResponse = response => ({ type: ADD_RESPONSE, payload: response });
 
@@ -18,5 +15,5 @@ const clearQuestions = () => ({ type: CLEAR_QUESTIONS });
 
 
 export {
-  addQuestions, updateGameState, addResponse, clearQuestions, fetchAndAddQuestions
+  addQuestions, addResponse, clearQuestions, fetchAndAddQuestions
 };
