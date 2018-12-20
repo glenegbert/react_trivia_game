@@ -1,16 +1,18 @@
-import axios from 'axios';
+import ApiService from './api_service';
 
 import {
-  loadQuestions, renderErrorMessage
+  loadQuestions,
 } from '../js/actions/index';
 
 const fetchQuestions = (dispatch) => {
-  return axios.get('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
-    .then(json => dispatch(loadQuestions(json.data.results)),error => dispatch(renderErrorMessage(error.message)));
-}
+  ApiService.fetchWithErrorHandling({
+    url: 'https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean',
+    success: response => loadQuestions(response.data.results),
+  }, dispatch);
+};
 
 const questionsService = {
- fetchQuestions: fetchQuestions
+  fetchQuestions,
 };
 
 export default questionsService;
