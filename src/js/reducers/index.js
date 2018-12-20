@@ -1,26 +1,27 @@
-import {
-  ADD_QUESTIONS, ADD_RESPONSE, CLEAR_QUESTIONS, CLEAR_ERROR_MESSAGE
-} from '../constants/action-types';
+import * as constants  from '../constants/action-types';
 import { combineReducers } from 'redux'
 
 
 const questions = (state = [], action) => {
   const { type, payload } = action
-  if (type === ADD_QUESTIONS) {
+  if (type === constants.LOAD_QUESTIONS) {
     return payload
-  } else if (type === CLEAR_QUESTIONS) {
+  } else if (type === constants.CLEAR_QUESTIONS) {
     return []
-  } else if (type === ADD_RESPONSE) {
+  } else if (type === constants.ADD_RESPONSE) {
     return addResponse(state, payload)
   }
   return state
 };
 
-const errorMessage = (state = "Oh noes", action) => {
-  const {type } = action
+const errorMessage = (state = null, action) => {
+  const {type, payload } = action
 
-  if (type === CLEAR_ERROR_MESSAGE) {
+  if (type === constants.CLEAR_ERROR_MESSAGE) {
     return null
+  }
+  if (type === constants.RENDER_ERROR_MESSAGE) {
+    return payload
   }
   return state
 }

@@ -1,21 +1,16 @@
-import {
-  ADD_QUESTIONS, ADD_RESPONSE, CLEAR_QUESTIONS, CLEAR_ERROR_MESSAGE
-} from '../constants/action-types';
-import QuestionsService from '../../services/questions_service';
+import * as constants  from '../constants/action-types';
 
-const fetchAndAddQuestions = (dispatch) => {
-    QuestionsService.fetchQuestions(dispatch, addQuestions)
-};
+const loadQuestions = questions => ({ type: constants.LOAD_QUESTIONS, payload: questions });
 
-const addQuestions = questions => ({ type: ADD_QUESTIONS, payload: questions });
+const addResponse = response => ({ type: constants.ADD_RESPONSE, payload: response });
 
-const addResponse = response => ({ type: ADD_RESPONSE, payload: response });
+const clearQuestions = () => ({ type: constants.CLEAR_QUESTIONS });
 
-const clearQuestions = () => ({ type: CLEAR_QUESTIONS });
+const clearErrorMessage = () => ({ type: constants.CLEAR_ERROR_MESSAGE});
 
-const clearErrorMessage = () => ({ type: CLEAR_ERROR_MESSAGE});
+const renderErrorMessage = message => ({ type: constants.RENDER_ERROR_MESSAGE, payload: message })
 
 
 export {
-  addQuestions, addResponse, clearQuestions, fetchAndAddQuestions, clearErrorMessage,
+  addResponse, clearQuestions, clearErrorMessage, loadQuestions, renderErrorMessage
 };

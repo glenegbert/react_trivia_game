@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 // import axios from 'axios';
 import { connect } from 'react-redux';
 import {
-  addQuestions, addResponse, clearQuestions, fetchAndAddQuestions
+   addResponse, clearQuestions
 } from '../js/actions/index';
 import QuestionDisplay from './question_display';
+import QuestionsService from '../services/questions_service';
 
 
 const mapDispatchToProps = dispatch => ({
-  addQuestions: questions => dispatch(addQuestions(questions)),
   addResponse: response => dispatch(addResponse(response)),
   clearQuestions: () => dispatch(clearQuestions()),
-  fetchAndAddQuestions: () => dispatch(fetchAndAddQuestions),
+  fetchAndAddQuestions: () => QuestionsService.fetchQuestions(dispatch)
 });
 
 const mapStateToProps = state => ({ questions: state.questions });
@@ -102,7 +102,6 @@ class GamePlay extends Component {
 }
 
 GamePlay.propTypes = {
-  addQuestions: PropTypes.func.isRequired,
   addResponse: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
