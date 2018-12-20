@@ -33,8 +33,6 @@ class GamePlay extends Component {
   componentDidMount() {
     const { fetchAndAddQuestions } = this.props;
     fetchAndAddQuestions()
-//    axios.get('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
- //     .then(json => addQuestions(json.data.results));
   }
 
   loadingIndicator() {

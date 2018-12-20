@@ -5,8 +5,6 @@ import ReactUtils from '../helpers/react_utils';
 
 const bem = ReactUtils.makeBem('game-intro');
 
-const mapStateToProps = state => ({ gameState: state.gameState });
-
 const mapDispatchToProps = dispatch => ({
 });
 
@@ -29,6 +27,6 @@ const GameIntro = ({ history }) => (
   </div>);
 
 
-const Intro = connect(mapStateToProps, mapDispatchToProps)(GameIntro);
+const Intro = connect(null, mapDispatchToProps)(GameIntro);
 
 export default Intro;

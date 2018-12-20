@@ -1,5 +1,5 @@
 import {
-  ADD_QUESTIONS, ADD_RESPONSE, CLEAR_QUESTIONS,
+  ADD_QUESTIONS, ADD_RESPONSE, CLEAR_QUESTIONS, CLEAR_ERROR_MESSAGE
 } from '../constants/action-types';
 import { combineReducers } from 'redux'
 
@@ -16,6 +16,15 @@ const questions = (state = [], action) => {
   return state
 };
 
+const errorMessage = (state = "Oh noes", action) => {
+  const {type } = action
+
+  if (type === CLEAR_ERROR_MESSAGE) {
+    return null
+  }
+  return state
+}
+
 const addResponse = (questions, response) => {
 
   const newQuestions = questions.filter(
@@ -29,7 +38,8 @@ const addResponse = (questions, response) => {
 };
 
 const rootReducer = combineReducers({
-  questions
+  questions,
+  errorMessage
 })
 
 
